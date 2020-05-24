@@ -103,7 +103,6 @@ class Community:
 
     def run_stable_marriage_algorithm(self):
         available_guy_name = self.get_first_available_guy()
-        iterations = 0
         while available_guy_name is not None:
             available_guy = self.guys[available_guy_name]
             proposed_girl = None  # Setting a dummy initialization, it must get reassigned in the following loop
@@ -130,10 +129,9 @@ class Community:
                     self.pairs[proposed_girl.name] = Pairing(available_guy, proposed_girl)
 
             available_guy_name = self.get_first_available_guy()
-            iterations += 1
+            self.iterations += 1
 
         self.is_everyone_paired = True
-        self.iterations = iterations
 
     def get_average_index(self):
         preference_indices_male = []
