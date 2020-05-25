@@ -93,7 +93,8 @@ class Community:
             self.girls[girl].print_person()
 
     def print_pairs(self):
-        print(self.pairs.values())
+        print("The following matches have been made:")
+        print(list(self.pairs.values()))
 
     def get_first_available_guy(self):
         for guy_name in self.guys.keys():
@@ -151,6 +152,7 @@ class Community:
         if not self.is_everyone_paired:
             print("Run the run_stable_marriage_algorithm first!")
         else:
+            print("STATS:")
             print("This stable marriage solution took {} iterations to complete.".format(self.iterations))
             male_index, female_index = self.get_average_index()
             print("In each pairing, the average girl ranking for a guy was {}.".format(male_index))
