@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 
 from classic.stable_marriage_problem_classic import Community
 from pandas import DataFrame
+from statistics import mean
 from time import time
 
 
@@ -17,27 +18,39 @@ def execute_simulations(starting_num, increment, num_data_points):
 
     for i in range(starting_num, starting_num*num_data_points, increment):
         start = time()
-        stats = {}
-        com = Community(i)
-        com.run_stable_marriage_algorithm()
+        stats = {
+            'Iterations': [],
+            'Male Index': [],
+            'Female Index': [],
+            'Male Advantage': []
+        }
+        for j in range(10):
+            com = Community(i)
+            com.run_stable_marriage_algorithm()
 
-        stats['Iterations'] = com.iterations
+            stats['Iterations'].append(com.iterations)
 
-        average_male_index, average_female_index = com.get_average_index()
-        male_advantage = average_female_index - average_male_index
-        percentage_advantage = round((male_advantage * 100) / float(i - 1), 2)
+            average_male_index, average_female_index = com.get_average_index()
+            male_advantage = average_female_index - average_male_index
+            percentage_advantage = (male_advantage * 100) / float(i - 1)
 
-        # The average rank of every guy's partner from their preferences list
-        stats['Male Index'] = round(average_male_index, 2)
-        # The average rank of every girl's partner from their preference list
-        stats['Female Index'] = round(average_female_index, 2)
+            # The average rank of every guy's partner from their preferences list
+            stats['Male Index'].append(average_male_index)
+            # The average rank of every girl's partner from their preference list
+            stats['Female Index'].append(average_female_index)
 
-        # Male advantage (may be negative) based on if going from least to most desirable is a 100% gain
-        stats['Male Advantage'] = percentage_advantage
+            # Male advantage (may be negative) based on if going from least to most desirable is a 100% gain
+            stats['Male Advantage'].append(percentage_advantage)
 
-        data[i] = stats
+        final_stats = {}
 
-        print("Finished Simulation with a Community of {} people in {} seconds".format(i*2, time() - start))
+        for key in stats:
+            final_value = round(mean(stats[key]), 2)
+            final_stats[key] = final_value
+
+        data[i] = final_stats
+
+        print("Finished 10 Simulations with a Community of {} people in {} seconds".format(i*2, time() - start))
 
     return DataFrame(data).T
 
