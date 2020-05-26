@@ -73,8 +73,8 @@ class Community:
         # Set the people in the community
         for guy_name in guy_names:
             sc_girls = girl_names[:]  # Need to make a shallow copy here to avoid side effects with Random module
-            # Apply a normal distribution for guy's preference sets
-            random.shuffle(sc_girls, lambda: max(0.0, min(1.0, random.gauss(0.5, 0.1))))
+            # Using 8 9's value to prevent 1.0 value which is prohibited by shuffle
+            random.shuffle(sc_girls, lambda: max(0.0, min(0.99999999, random.gauss(0.5, 0.1))))  # Apply a Gaussian
             self.guys[guy_name] = Person('M', guy_name, True, sc_girls)
 
         # Create a pareto distribution for the guys to model girl's preferences
@@ -83,8 +83,8 @@ class Community:
             # Apply a 1.16 alpha value to model 80-20, source: https://en.wikipedia.org/wiki/Pareto_index
             pareto_values.append(random.paretovariate(1.16))
 
-        # Normalizing values, using 7 9's value to prevent 1.0 value which is prohibited by shuffle
-        norm_pareto_values = [min(0.9999999, float(i)/max(pareto_values)) for i in pareto_values]
+        # Normalizing values, using 8 9's value to prevent 1.0 value which is prohibited by shuffle
+        norm_pareto_values = [min(0.99999999, float(i)/max(pareto_values)) for i in pareto_values]
 
         for idx, girl_name in enumerate(girl_names):
             sc_guys = guy_names[:]
