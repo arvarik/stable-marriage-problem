@@ -7,7 +7,7 @@ A script to execute some simulations related to the classic implementation of th
 """
 import matplotlib.pyplot as plt
 
-from classic.stable_marriage_problem_classic import Community
+from distribution.stable_marriage_problem_distribution import Community
 from pandas import DataFrame
 from statistics import mean
 from time import time
