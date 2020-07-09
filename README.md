@@ -12,10 +12,12 @@ This repo attempts to implement the classic algorithm to the
 * /classic
     * stable_marriage_problem_classic.py
         * This file implements a `Community` object which represents the actors and algorithm in the SMP
+        * In root directory, run: `python3 -m classic.stable_marriage_problem_classic`
     * simulations.py
         * This is the file to execute in order to run some simulations of the algorithm
         * Adjust the values in `main()` to tweak executions of the simulation
-        * Executing the code as is should produce the following graph:
+         * In root directory, run: `python3 -m classic.simulations`
+            * Executing the code as is should produce the following graph:
 
 <p align="center">
     <img src="./assets/classic_simulation_multiple_iterations.png">
@@ -25,11 +27,13 @@ This repo attempts to implement the classic algorithm to the
     * stable_marriage_problem_distribution.py
         * This file implements a `Community` object which represents the actors and algorithm in the SMP, but applies
           a normal/pareto asymmetry in preferences between men/women
+        * In root directory, run: `python3 -m distribution.stable_marriage_problem_distribution`
     * simulations.py
         * This is the file to execute in order to run some simulations of the algorithm
         * Adjust the values in `main()` to tweak executions of the simulation
         * This is pretty much the same code as the `simulations.py` in the `/classic` package
-        * Executing the code as is should produce the following graph:
+        * In root directory, run: `python3 -m distribution.simulations`
+            * Executing the code as is should produce the following graph:
 
 <p align="center">
     <img src="./assets/smp_distribution.png">
